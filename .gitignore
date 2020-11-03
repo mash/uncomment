@@ -16,3 +16,6 @@
 
 # Built binaries
 bin/*
+
+# temporary test files
+*.json

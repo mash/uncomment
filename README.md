@@ -21,6 +21,9 @@ Uncomment is a simple command line tool to strip the comments out of relaxed JSO
 % bin/uncomment infile.json
 {"foo":"bar"}
 
+% bin/uncomment -i infile.json -o outfile.json
+outfile.json
+
 % bin/uncomment -h
 Usage of bin/uncomment:
   -i string
@@ -28,6 +31,16 @@ Usage of bin/uncomment:
   -n    Do not print the trailing newline character.
   -o string
         Output file name
+```
+
+### Useful tricks
+
+```
+# jq expects strict JSON
+% cat relaxed.json | uncomment | jq .
+
+# if another tool expects a strict JSON file
+% command -c `uncomment -i relaxed.json -o strict.json`
 ```
 
 ## Install
