@@ -23,8 +23,8 @@ func (f Flags) Options() []Option {
 
 func ParseFlags() Flags {
 	f := Flags{}
-	flag.StringVar(&f.input, "i", "", "Input file name")
-	flag.StringVar(&f.output, "o", "", "Output file name")
+	flag.StringVar(&f.input, "i", "", "Input file name.")
+	flag.StringVar(&f.output, "o", "", "Output file name.")
 	flag.BoolVar(&f.noTrailingNewline, "n", false, "Do not print the trailing newline character.")
 	flag.Parse()
 	return f
