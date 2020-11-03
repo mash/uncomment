@@ -28,6 +28,16 @@ func TestUncomment(t *testing.T) {
 			expected:      `{"k":"v"}`,
 			expectedError: "unexpected EOF",
 		},
+		{
+			in: bytes.NewBufferString(`[1]`),
+			expected: `[1]
+`,
+		},
+		{
+			in: bytes.NewBufferString(`"foo"`),
+			expected: `"foo"
+`,
+		},
 	}
 	for _, test := range tests {
 		out := &bytes.Buffer{}

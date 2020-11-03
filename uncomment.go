@@ -22,7 +22,7 @@ func Uncomment(r io.Reader, w io.Writer, options ...Option) error {
 	}
 
 	dec := json5.NewDecoder(r)
-	obj := map[string]interface{}{}
+	var obj interface{}
 	if err := dec.Decode(&obj); err != nil {
 		return err
 	}
