@@ -30,6 +30,12 @@ Usage of bin/uncomment:
         Output file name
 ```
 
+## Install
+
+```
+% go get github.com/mash/uncomment/cmd/uncomment
+```
+
 ## See also
 
 https://json5.org/

@@ -1,5 +1,5 @@
 build:
-	go build -o bin/uncomment cmd/main.go
+	go build -o bin/uncomment cmd/uncomment/main.go
 
 run:
 	go run cmd/main.go
