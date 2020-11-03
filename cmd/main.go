@@ -7,13 +7,15 @@ import (
 )
 
 func main() {
-	f, err := uncomment.NewFlags()
+	f := uncomment.ParseFlags()
+	r, w, err := uncomment.Session(f)
 	if err != nil {
-		log.Fatalf("uncomment: %s", err.Error())
+		log.Fatalf("uncomment: %s", err)
 	}
-	defer f.Close()
+	defer r.Close()
+	defer w.Close()
 
-	if err := uncomment.Uncomment(f.Reader, f.Writer); err != nil {
-		log.Fatalf("uncomment: %s", err.Error())
+	if err := uncomment.Uncomment(r, w, f.Options()...); err != nil {
+		log.Fatalf("uncomment: %s", err)
 	}
 }
