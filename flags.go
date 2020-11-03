@@ -14,11 +14,15 @@ type Flags struct {
 	noTrailingNewline bool
 }
 
-func (f Flags) Options() []Option {
+func (f Flags) Options() Options {
+	opts := Options{}
 	if f.noTrailingNewline {
-		return []Option{NoTrailingNewline}
+		opts.NoTrailingNewline = true
 	}
-	return []Option{}
+	if f.output != "" {
+		opts.PrintOutputFilename = f.output
+	}
+	return opts
 }
 
 func ParseFlags() Flags {

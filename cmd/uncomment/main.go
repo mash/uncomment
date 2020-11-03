@@ -15,7 +15,7 @@ func main() {
 	defer r.Close()
 	defer w.Close()
 
-	if err := uncomment.Uncomment(r, w, f.Options()...); err != nil {
+	if err := uncomment.Uncomment(r, w, f.Options()); err != nil {
 		log.Fatalf("uncomment: %s", err)
 	}
 }

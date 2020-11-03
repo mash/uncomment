@@ -2,32 +2,25 @@ package uncomment
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 
 	"github.com/flynn/json5"
 )
 
-type Option int
+type Options struct {
+	NoTrailingNewline   bool
+	PrintOutputFilename string
+}
 
-const (
-	NoTrailingNewline Option = iota
-)
-
-func Uncomment(r io.Reader, w io.Writer, options ...Option) error {
-	noTrailingNewline := false
-	for _, o := range options {
-		if o == NoTrailingNewline {
-			noTrailingNewline = true
-		}
-	}
-
+func Uncomment(r io.Reader, w io.Writer, options Options) error {
 	dec := json5.NewDecoder(r)
 	var obj interface{}
 	if err := dec.Decode(&obj); err != nil {
 		return err
 	}
 
-	if noTrailingNewline {
+	if options.NoTrailingNewline {
 		b, err := json.Marshal(obj)
 		if err != nil {
 			return err
@@ -41,5 +34,10 @@ func Uncomment(r io.Reader, w io.Writer, options ...Option) error {
 			return err
 		}
 	}
+
+	if options.PrintOutputFilename != "" {
+		fmt.Printf("%s", options.PrintOutputFilename)
+	}
+
 	return nil
 }

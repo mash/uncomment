@@ -11,7 +11,7 @@ func TestUncomment(t *testing.T) {
 		in            io.Reader
 		expected      string
 		expectedError string
-		options       []Option
+		options       Options
 	}{
 		{
 			in: bytes.NewBufferString(`{k:/* commented */ "v",}`),
@@ -21,7 +21,9 @@ func TestUncomment(t *testing.T) {
 		{
 			in:       bytes.NewBufferString(`{k:/* commented */ "v",}`),
 			expected: `{"k":"v"}`,
-			options:  []Option{NoTrailingNewline},
+			options: Options{
+				NoTrailingNewline: true,
+			},
 		},
 		{
 			in:            bytes.NewBufferString(`{k:// "v",}`),
@@ -42,7 +44,7 @@ func TestUncomment(t *testing.T) {
 	for _, test := range tests {
 		out := &bytes.Buffer{}
 
-		err := Uncomment(test.in, out, test.options...)
+		err := Uncomment(test.in, out, test.options)
 		if err != nil || test.expectedError != "" {
 			if e, g := test.expectedError, err; e != g.Error() {
 				t.Errorf("expected error |%s| but got |%s|\n", e, g)
