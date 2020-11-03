@@ -27,6 +27,11 @@ func ParseFlags() Flags {
 	flag.StringVar(&f.output, "o", "", "Output file name.")
 	flag.BoolVar(&f.noTrailingNewline, "n", false, "Do not print the trailing newline character.")
 	flag.Parse()
+
+	// -i can be omited
+	if in := flag.Arg(0); in != "" && f.input == "" {
+		f.input = in
+	}
 	return f
 }
 
